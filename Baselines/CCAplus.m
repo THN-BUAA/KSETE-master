@@ -1,4 +1,5 @@
-function [ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = CCAplus( source, target, LOC, randSeed)
+function perf = CCAplus( source, target, LOC, randSeed)
+%function [ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = CCAplus( source, target, LOC, randSeed)
 %CCAPLUS Summary of this function goes here: Implement CCA+ algorithm.
 %   Detailed explanation goes here
 % INPUTS:
@@ -7,7 +8,7 @@ function [ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = CCAplus( 
 %   (3) LOC    - the number of lines in each module. 
 %   (4) randSeed - the seed of random.
 % OUTPUTS:
-%   
+%   perf       - a struct of performance measures
 %
 % Reference: X. Jing, F. Wu, X. Dong, F. Qi, and B. Xu, "Heterogeneous
 %       cross-company defect prediction by unified metric representation
@@ -93,8 +94,12 @@ probPos = prob(:,2);
 
 
 try
-    [ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = Performance(newTarget(:,end), probPos, LOC); % Call self-defined Performance()
+	perf = Performance(newTarget(:,end), probPos, LOC);
+    %[ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = Performance(newTarget(:,end), probPos, LOC); % Call self-defined Performance()
 catch
-    PD=nan;PF=nan;Precision=nan;F1=nan;AUC=nan;Accuracy=nan;G_measure=nan;MCC=nan;Popt20=nan;IFA=nan;
- end
+    perf.PD=nan; perf.PF=nan; perf.Precision=nan; perf.F1=nan; perf.AUC=nan; perf.Accuracy=nan; perf.G_measure=nan; perf.MCC=nan; perf.Popt=nan; perf.IFA=nan;
+	%PD=nan;PF=nan;Precision=nan;F1=nan;AUC=nan;Accuracy=nan;G_measure=nan;MCC=nan;Popt20=nan;IFA=nan;
+end
+
+end
 

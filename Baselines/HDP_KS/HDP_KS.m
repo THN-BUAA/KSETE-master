@@ -1,11 +1,13 @@
-function [PD, PF, Precision, F1, AUC, Accuracy, G_measure, MCC,Popt20,IFA] = HDP_KS(source, target, LOC)
+function perf = HDP_KS(source, target, LOC)
+%function [PD, PF, Precision, F1, AUC, Accuracy, G_measure, MCC,Popt20,IFA] = HDP_KS(source, target, LOC)
 %HDP_KS Summary of this function goes here
 % Detailed explanation goes here:
 % INPUTS:
 %   (1) source - a n1*(d1+1) matrix, d1 denotes the number of features, the last column is the labels.  
 %   (2) target - a n2*(d2+1) matrix, d2 denotes the number of features, the last column is the labels.
+%	(3) LOC    - the lines of code of modules in target data.
 % OUTPUTS:
-%   (1) PD, PF,..., MCC
+%   (1) perf   - a struct of performance measures, such as PD, PF,..., MCC.
 %
 % Reference: Nam J , Fu W , Kim S , et al. Heterogeneous Defect Prediction[J]. IEEE Transactions on Software Engineering, 2018:1-1.
 %
@@ -85,9 +87,11 @@ probPos = glmval(model, x_target, 'logit');
 predLabel = double(probPos >= 0.5);
 
 try
-    [ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = Performance( y_target, probPos, LOC);
+    perf = Performance( y_target, probPos, LOC);
+	%[ PD,PF,Precision,F1,AUC,Accuracy,G_measure,MCC,Popt20,IFA] = Performance( y_target, probPos, LOC);
 catch
-    PD=nan;PF=nan;Precision=nan; F1=nan;AUC=nan;Accuracy=nan;G_measure=nan;MCC=nan;Popt20=nan;IFA=nan;
+	perf.PD=nan; perf.PF=nan; perf.Precision=nan; perf.F1=nan; perf.AUC=nan; perf.Accuracy=nan; perf.G_measure=nan; perf.MCC=nan; perf.Popt=nan; perf.IFA=nan;
+    %PD=nan;PF=nan;Precision=nan; F1=nan;AUC=nan;Accuracy=nan;G_measure=nan;MCC=nan;Popt20=nan;IFA=nan;
 end
 
 end
