@@ -8,7 +8,7 @@ function perf = Performance( actual_label, probPos, loc)
 % OUTPUTS:
 %   perf: a strcut including PF,PF,..,MCC,Popt,IFA.
 
-if numel(unique(actual_label)) < 1
+if numel(unique(actual_label)) < 2
     error('Please make sure that the true label ''actual_label'' must has at least two different kinds of values.');   
 end
 
