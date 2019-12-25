@@ -9,7 +9,7 @@ Source code and all the datasets used in the paper (Kernel Spectral Embedding Tr
 ## Usage of KSETE
 - Step1: Download KSETE-master;
 - Step2: Open MATLAB, add the path of KSETE-master and its subfolders;
-- Step3: Add the absolute path of weka.jar in the folder KSETE into the classpath.txt of MATLAB.
+- Step3: Add the absolute path of weka.jar and SMOTE.jar in the folder KSETE into the classpath.txt of MATLAB.
 - Step4: Enter folder KSETE and open the script Experiment.m in MATLAB;
 - Step5: Click the run button in the manu of MATLAB Editor to run the example; 
 
